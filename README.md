@@ -1,6 +1,6 @@
 ### GitLab CE
 
-### Install docker Ubuntu
+### Install docker and docker compose (Ubuntu)
 
 ```shell
 sudo apt install curl -y
@@ -23,10 +23,11 @@ service docker status
 # active (running)
 ```
 
-### Docker compose
 ```shell
 sudo apt install docker-compose -y
 ```
+
+### Docker compose
 
 ```shell
 mkdir docker_gitlab_service; cd docker_gitlab_service

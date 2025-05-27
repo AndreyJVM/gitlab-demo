@@ -34,6 +34,10 @@ mkdir docker_gitlab_service; cd docker_gitlab_service
 ```
 
 ```shell
+nano .env
+```
+
+```shell
 nano docker-compose.yml
 ```
 

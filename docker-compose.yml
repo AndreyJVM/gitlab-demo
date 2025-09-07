@@ -22,10 +22,6 @@ services:
       start_period: 15m
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        gitlab_rails['smtp_enable'] = true
-        gitlab_rails['smtp_address'] = "${SMTP_ADDRESS}"
-        gitlab_rails['smtp_openssl_verify_mode'] = '${SMTP_OPENSSL_VERIFY_MODE}'
-        gitlab_rails['smtp_port'] = ${SMTP_PORT}
         gitlab_rails['gitlab_shell_ssh_port'] = 22
     ports:
       - "${GITLAB_HTTP_PORT}:80"
@@ -51,21 +47,6 @@ services:
     networks:
       net:
         ipv4_address: "${GITLAB_RUNNER_IPV4_ADDRESS}"
-
-  # MAIL
-  maildev:
-    container_name: maildev
-    image: "${MAILDEV_IMAGE}"
-    hostname: "${MAILDEV_HOSTNAME}"
-    restart: unless-stopped
-    extra_hosts:
-      - "${GITLAB_EXTRA_HOST_1}"
-    networks:
-      net:
-        ipv4_address: "${MAILDEV_IPV4_ADDRESS}"
-    ports:
-      - "${MAILDEV_WEB_PORT}:1080" # maildev - web application
-      - "${MAILDEV_SMTP_PORT}:1025" # will use 'mail:1025' to send emails
 
 # ALL options(network + volume)
 networks:

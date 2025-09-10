@@ -1,0 +1,45 @@
+stages:
+  - build
+  - test
+  - deploy
+  - report
+
+
+build_job:
+  stage: build
+  script:
+    - echo "Build completed" >> build.txt
+  artifacts:
+    name: "$CI_JOB_NAME"
+    paths:
+      - build.txt
+
+test_job:
+  stage: test
+  needs: ["build_job"]
+  script:
+    - echo "Tests passed" >> test.txt
+  artifacts:
+    name: "$CI_JOB_NAME"
+    paths:
+      - test.txt
+
+deploy_job:
+  stage: deploy
+  needs: ["test_job"]
+  script:
+    - echo "Deploy to starting" >> deploy.txt
+  artifacts:
+    name: "$CI_JOB_NAME"
+    paths:
+      - deploy.txt
+
+report_job:
+  stage: report
+  needs: ["build_job", "test_job", "deploy_job"]
+  script:
+    - cat build.txt test.txt deploy.txt >> report.txt
+  artifacts:
+    name: "$CI_JOB_NAME"
+    paths:
+      - report.txt

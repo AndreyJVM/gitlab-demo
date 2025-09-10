@@ -1,0 +1,39 @@
+variables:
+  APP_NAME: "My_app"
+  VERSION: "1.0.1"
+  ENV: "PROD"
+  DB_HOST_PROD: "db.prod.com"
+  DB_HOST_DEV: "db.dev.com"
+
+
+hello_job:
+  script:
+    - echo "Starting = $APP_NAME, version = $VERSION"
+
+build_job:
+  stage: build
+  script:
+    - echo "Building for environment $ENV"
+
+deploy_job:
+  stage: deploy
+  variables:
+    ENV: "prod"
+  script:
+    - echo "Deploying to environment $ENV"
+
+show_key:
+  script:
+  - echo "API_KEY - $API_KEY"
+
+connect_db:
+  script:
+    - echo "Подключаемя к (${DB_HOST_${ENV}})"
+  only: ["main"]
+
+connect_db_dev:
+  variables:
+    ENV: "DEV"
+  script:
+    - echo "Подключаемя к (${DB_HOST_${ENV}})"
+  except: ["main"]

@@ -1,0 +1,53 @@
+stages:
+  - .pre
+  - build
+  - test
+  - deploy
+  - .post
+
+pre_job:
+  stage: .pre
+  before_script:
+    - echo "This script is executed before each job"
+  script:
+    - echo "This is the PRE stage (executed before all others)"
+  after_script:
+    - echo "This script is executed after each job"
+
+build_job:
+  stage: build
+  before_script:
+    - echo "This script is executed before each job"
+  script:
+    - echo "This is the BUILD stage"
+  after_script:
+    - echo "This script is executed after each job"
+
+test_job:
+  stage: test
+  before_script:
+    - echo "This script is executed before each job"
+  script:
+    - echo "This is the TEST stage"
+  after_script:
+    - echo "This script is executed after each job"
+
+
+deploy_job:
+  stage: deploy
+  before_script:
+    - echo "This script is executed before each job"
+  script:
+    - echo "This is the DEPLOY stage"
+  after_script:
+    - echo "This script is executed after each job"
+
+
+post_job:
+  stage: .post
+  before_script:
+    - echo "This script is executed before each job"
+  script:
+    - echo "This is the POST stage (executed after all others)"
+  after_script:
+    - echo "This script is executed after each job"

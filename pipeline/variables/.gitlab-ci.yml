@@ -28,12 +28,12 @@ show_key:
 
 connect_db:
   script:
-    - echo "Подключаемя к (${DB_HOST_${ENV}})"
+    - echo "Подключаемя к $(eval echo \$DB_HOST_${ENV})."
   only: ["main"]
 
 connect_db_dev:
   variables:
     ENV: "DEV"
   script:
-    - echo "Подключаемя к (${DB_HOST_${ENV}})"
+    - echo "Подключаемя к $(eval echo \$DB_HOST_${ENV})."
   except: ["main"]

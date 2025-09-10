@@ -1,0 +1,43 @@
+stages:
+  - build
+  - prepare-package
+  - publish
+
+compile-and-test:
+  stage: build
+  script:
+    - echo "Run process..."
+
+prepare-package-linux:
+  stage: prepare-package
+  script:
+    - echo "Prepare and package"
+    - echo "00101" > linux_app.txt
+  artifacts:
+    untracked: false
+    when: on_success
+    expire_in: 10 days
+    paths:
+      - linux_app.txt
+
+prepare-package-windows:
+  stage: prepare-package
+  script:
+    - echo "Prepare windows-installer"
+    - echo "001001100101" > win_app.txt
+  artifacts:
+    untracked: false
+    when: on_success
+    expire_in: 10 days
+    paths:
+      - win_app.txt
+
+
+publish-artifacts-linux:
+  stage: publish
+  dependencies:
+    - prepare-package-linux
+  script:
+    - echo "The publishing prepared artifacts" 
+    - ls -lha
+    - cat linux_app.txt

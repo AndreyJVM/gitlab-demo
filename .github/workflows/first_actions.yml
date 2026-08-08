@@ -10,8 +10,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Build"
-  
+    - name: Use env
+      run: echo "Environment: ${{ env.NODE_ENV }}"
   test:
     needs: build
     runs-on: ubuntu-latest

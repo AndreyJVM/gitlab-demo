@@ -17,7 +17,7 @@ jobs:
       - name: Create artifact
         run: |
           mkdir build
-          echo "Hello" > build/file.txt
+          echo "Hello, from artifacts" > build/file.txt
       
       - name: Upload artifact
         uses: actions/upload-artifact@v4
